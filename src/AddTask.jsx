@@ -4,23 +4,19 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { TaskList } from "./TaskList";
+import { addtoTaskList } from "./slice";
+import { useDispatch } from "react-redux";
 
 export const AddTask = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [data, setData] = useState([]);
+  const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const model = {
-      s: data.length + 1,
-      title: title,
-      description: description,
-    };
-    console.log(model);
-    if (title !== "" && description !== "") {
-      setData([...data, model]);
-    }
+    dispatch(addtoTaskList({ title, description }));
+    setTitle("");
+    setDescription("");
   };
 
   return (
@@ -55,7 +51,7 @@ export const AddTask = () => {
           </Form>
         </Col>
       </Row>
-      <TaskList data={data} />
+      <TaskList />
     </div>
   );
 };

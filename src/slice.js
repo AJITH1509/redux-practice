@@ -10,10 +10,9 @@ const tasksSlice = createSlice({
   initialState,
   reducers: {
     addtoTaskList: (state, action) => {
-      const { taskList } = state;
       const id = Math.random() * 100;
       const task = { ...action.payload, id };
-      taskList.push(task);
+      state.taskList.push(task);
     },
     updateTaskList: (state, action) => {
       state.taskList = state.taskList.map((task) =>
